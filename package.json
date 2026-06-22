@@ -1,0 +1,14 @@
+{
+  "name": "generador-sda-andalucia",
+  "version": "1.0.0",
+  "description": "Generador de Situaciones de Aprendizaje para Andalucía (LOMLOE) con IA",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.39.0",
+    "express": "^4.21.0"
+  }
+}

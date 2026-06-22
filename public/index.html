@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Generador de Situaciones de Aprendizaje - Andalucía</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Generador de Situaciones de Aprendizaje</h1>
+    <p class="subtitle">LOMLOE · Andalucía</p>
+  </header>
+
+  <main>
+    <form id="sda-form">
+      <section class="form-section">
+        <h2>Configuración</h2>
+        <div class="form-group">
+          <label for="apiKey">API Key de Anthropic <span class="required">*</span></label>
+          <input type="password" id="apiKey" placeholder="sk-ant-..." required>
+          <small>Tu clave no se almacena en el servidor.</small>
+        </div>
+      </section>
+
+      <section class="form-section">
+        <h2>Datos curriculares</h2>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="etapa">Etapa educativa <span class="required">*</span></label>
+            <select id="etapa" required>
+              <option value="">Seleccionar...</option>
+              <option value="Educación Infantil">Educación Infantil</option>
+              <option value="Educación Primaria">Educación Primaria</option>
+              <option value="Educación Secundaria Obligatoria">ESO</option>
+              <option value="Bachillerato">Bachillerato</option>
+              <option value="Formación Profesional Básica">FP Básica</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="curso">Curso <span class="required">*</span></label>
+            <select id="curso" required>
+              <option value="">Seleccionar...</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="area">Área / Materia <span class="required">*</span></label>
+          <input type="text" id="area" placeholder="Ej: Matemáticas, Lengua Castellana y Literatura..." required>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="titulo">Título de la SdA <span class="required">*</span></label>
+            <input type="text" id="titulo" placeholder="Ej: Exploradores del medio ambiente" required>
+          </div>
+          <div class="form-group">
+            <label for="temporalizacion">Temporalización <span class="required">*</span></label>
+            <input type="text" id="temporalizacion" placeholder="Ej: 12 sesiones (3 semanas)" required>
+          </div>
+        </div>
+      </section>
+
+      <section class="form-section">
+        <h2>Detalles (opcional)</h2>
+        <div class="form-group">
+          <label for="justificacion">Justificación / Contexto</label>
+          <textarea id="justificacion" rows="3" placeholder="Describe brevemente el contexto del centro, el alumnado, o la motivación de la SdA..."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="competenciasEspecificas">Competencias específicas a trabajar</label>
+          <textarea id="competenciasEspecificas" rows="2" placeholder="Ej: CE.M.1, CE.M.3 o describe las competencias que quieres incluir..."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="criteriosEvaluacion">Criterios de evaluación</label>
+          <textarea id="criteriosEvaluacion" rows="2" placeholder="Códigos o descripción de los criterios..."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="saberes">Saberes básicos</label>
+          <textarea id="saberes" rows="2" placeholder="Bloques o saberes concretos a incluir..."></textarea>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="metodologia">Metodología preferida</label>
+            <select id="metodologia">
+              <option value="">Sin preferencia</option>
+              <option value="Aprendizaje Basado en Proyectos (ABP)">ABP (Proyectos)</option>
+              <option value="Aprendizaje Basado en Problemas">ABP (Problemas)</option>
+              <option value="Aprendizaje Cooperativo">Aprendizaje Cooperativo</option>
+              <option value="Gamificación">Gamificación</option>
+              <option value="Flipped Classroom">Flipped Classroom</option>
+              <option value="Aprendizaje-Servicio">Aprendizaje-Servicio</option>
+              <option value="Design Thinking">Design Thinking</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="atencionDiversidad">Atención a la diversidad</label>
+            <textarea id="atencionDiversidad" rows="2" placeholder="Necesidades específicas del grupo..."></textarea>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="productosFinales">Productos finales esperados</label>
+          <input type="text" id="productosFinales" placeholder="Ej: Mural, presentación oral, portfolio digital...">
+        </div>
+      </section>
+
+      <button type="submit" id="btn-generar">
+        <span class="btn-text">Generar Situación de Aprendizaje</span>
+        <span class="btn-loading" hidden>
+          <span class="spinner"></span> Generando...
+        </span>
+      </button>
+    </form>
+
+    <section id="resultado" hidden>
+      <div class="resultado-header">
+        <h2>Situación de Aprendizaje generada</h2>
+        <div class="resultado-actions">
+          <button id="btn-copiar" title="Copiar al portapapeles">📋 Copiar</button>
+          <button id="btn-descargar" title="Descargar como Markdown">💾 Descargar .md</button>
+          <button id="btn-imprimir" title="Imprimir">🖨️ Imprimir</button>
+        </div>
+      </div>
+      <div id="resultado-contenido"></div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Generador de Situaciones de Aprendizaje · LOMLOE Andalucía · Powered by Claude AI</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
