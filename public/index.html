@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Generador de Situaciones de Aprendizaje - Andalucía</title>
   <link rel="stylesheet" href="style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.2/html2pdf.bundle.min.js"></script>
 </head>
 <body>
   <header>
@@ -123,7 +124,9 @@
         <h2>Situación de Aprendizaje generada</h2>
         <div class="resultado-actions">
           <button id="btn-copiar" title="Copiar al portapapeles">📋 Copiar</button>
-          <button id="btn-descargar" title="Descargar como Markdown">💾 Descargar .md</button>
+          <button id="btn-descargar" title="Descargar como Markdown">💾 .md</button>
+          <button id="btn-pdf" title="Descargar como PDF">📄 PDF</button>
+          <button id="btn-word" title="Descargar como Word">📝 Word</button>
           <button id="btn-imprimir" title="Imprimir">🖨️ Imprimir</button>
         </div>
       </div>

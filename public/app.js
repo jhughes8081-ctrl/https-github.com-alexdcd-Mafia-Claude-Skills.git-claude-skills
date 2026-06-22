@@ -136,6 +136,64 @@ document.getElementById('btn-descargar').addEventListener('click', () => {
   URL.revokeObjectURL(a.href);
 });
 
+document.getElementById('btn-pdf').addEventListener('click', () => {
+  const contenido = document.getElementById('resultado-contenido');
+  const titulo = document.getElementById('titulo').value || 'situacion-aprendizaje';
+  const filename = titulo.toLowerCase().replace(/[^a-z0-9]+/g, '-') + '.pdf';
+
+  const opt = {
+    margin: [15, 15, 15, 15],
+    filename,
+    image: { type: 'jpeg', quality: 0.98 },
+    html2canvas: { scale: 2, useCORS: true },
+    jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
+    pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
+  };
+
+  const btn = document.getElementById('btn-pdf');
+  btn.textContent = '⏳ Generando...';
+  btn.disabled = true;
+
+  html2pdf().set(opt).from(contenido).save().then(() => {
+    btn.textContent = '📄 PDF';
+    btn.disabled = false;
+  });
+});
+
+document.getElementById('btn-word').addEventListener('click', () => {
+  const contenido = document.getElementById('resultado-contenido').innerHTML;
+  const titulo = document.getElementById('titulo').value || 'situacion-aprendizaje';
+  const filename = titulo.toLowerCase().replace(/[^a-z0-9]+/g, '-') + '.doc';
+
+  const html = `
+    <html xmlns:o="urn:schemas-microsoft-com:office:office"
+          xmlns:w="urn:schemas-microsoft-com:office:word"
+          xmlns="http://www.w3.org/TR/REC-html40">
+    <head>
+      <meta charset="utf-8">
+      <style>
+        body { font-family: Calibri, Arial, sans-serif; font-size: 11pt; line-height: 1.6; color: #1a1a2e; margin: 2cm; }
+        h1 { font-size: 18pt; color: #1a5276; margin-top: 16pt; }
+        h2 { font-size: 14pt; color: #1a5276; margin-top: 14pt; }
+        h3 { font-size: 12pt; color: #2c3e50; margin-top: 12pt; }
+        table { border-collapse: collapse; width: 100%; margin: 8pt 0; }
+        th, td { border: 1px solid #bbb; padding: 5pt 8pt; font-size: 10pt; }
+        th { background-color: #eef2f7; font-weight: bold; }
+        ul, ol { margin-left: 18pt; }
+        blockquote { border-left: 3px solid #2e86c1; padding-left: 10pt; color: #555; }
+      </style>
+    </head>
+    <body>${contenido}</body>
+    </html>`;
+
+  const blob = new Blob([html], { type: 'application/msword' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = filename;
+  a.click();
+  URL.revokeObjectURL(a.href);
+});
+
 document.getElementById('btn-imprimir').addEventListener('click', () => {
   window.print();
 });
